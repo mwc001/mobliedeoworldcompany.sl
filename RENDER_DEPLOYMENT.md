@@ -26,7 +26,7 @@ Fill in the following:
 | **Name** | lms-django (or your preferred name) |
 | **Environment** | Python 3 |
 | **Build Command** | `pip install -r requirements/production.txt && python manage.py collectstatic --noinput` |
-| **Start Command** | `gunicorn SMS.wsgi:application` |
+| **Start Command** | `python -m gunicorn SMS.wsgi:application` |
 | **Instance Type** | Free (or Starter+) |
 
 #### 3. Add Environment Variables
@@ -74,7 +74,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements/production.txt && python manage.py collectstatic --noinput
-    startCommand: gunicorn SMS.wsgi:application
+    startCommand: python -m gunicorn SMS.wsgi:application
     envVars:
       - key: DEBUG
         value: false

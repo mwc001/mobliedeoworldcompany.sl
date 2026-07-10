@@ -42,7 +42,7 @@ echo    - Name: lms-django (or your preference)
 echo    - Environment: Python 3
 echo    - Region: Choose closest to you
 echo    - Build Command: pip install -r requirements/production.txt ^&^& python manage.py collectstatic --noinput
-echo    - Start Command: gunicorn SMS.wsgi:application
+echo    - Start Command: python -m gunicorn SMS.wsgi:application
 echo    - Instance Type: Free (or Starter+)
 echo.
 

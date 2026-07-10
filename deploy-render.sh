@@ -42,7 +42,7 @@ echo "4. Configure Web Service:"
 echo "   - Name: lms-django (or your preference)"
 echo "   - Environment: Python 3"
 echo "   - Build: pip install -r requirements/production.txt && python manage.py collectstatic --noinput"
-echo "   - Start: gunicorn SMS.wsgi:application"
+echo "   - Start: python -m gunicorn SMS.wsgi:application"
 echo "   - Instance Type: Free (or Starter+)"
 echo ""
 
