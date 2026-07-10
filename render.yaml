@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements/production.txt && python manage.py collectstatic --noinput
-    startCommand: gunicorn SMS.wsgi:application
+    startCommand: python -m gunicorn SMS.wsgi:application
     healthCheckPath: /
     region: oregon
     pythonVersion: 3.9
