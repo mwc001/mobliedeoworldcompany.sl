@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: lms-django
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements/production.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn SMS.wsgi:application
+    healthCheckPath: /
+    region: oregon
+    pythonVersion: 3.9
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: 3.9
+      - key: SECRET_KEY
+        sync: false
+      - key: ALLOWED_HOSTS
+        value: ${{ RENDER_EXTERNAL_HOSTNAME }}
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lms-db
+          property: connectionString
+      - key: USE_S3
+        value: "False"
+      - key: SECURE_SSL_REDIRECT
+        value: "True"
+      - key: SESSION_COOKIE_SECURE
+        value: "True"
+      - key: CSRF_COOKIE_SECURE
+        value: "True"
+
+databases:
+  - name: lms-db
+    databaseName: lmsdb
+    plan: free
+    postgresSQLVersion: 14
