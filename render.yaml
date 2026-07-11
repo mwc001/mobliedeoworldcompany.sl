@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: python -m pip install --upgrade pip && python -m pip install -r requirements/production.txt && python manage.py collectstatic --noinput
-    startCommand: python -m gunicorn --bind 0.0.0.0:$PORT SMS.wsgi:application
+    startCommand: bash start.sh
     healthCheckPath: /
     region: oregon
     pythonVersion: 3.9

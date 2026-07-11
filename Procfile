@@ -1,2 +1,2 @@
-web: python -m gunicorn --bind 0.0.0.0:$PORT SMS.wsgi:application
+web: bash start.sh
 worker: celery -A SMS worker -l info
