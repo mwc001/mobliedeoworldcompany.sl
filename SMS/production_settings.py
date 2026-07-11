@@ -17,7 +17,11 @@ Environment variables needed:
 import os
 import environ
 
+from pathlib import Path
+
 env = environ.Env()
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Override DEBUG for production
 DEBUG = env.bool('DEBUG', False)
