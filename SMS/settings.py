@@ -24,12 +24,25 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "o!ld8nrt4vc*h1zoey*wj48x*q0#ss12h=+zh)kk^6b3aygg=!"
+SECRET_KEY = env("SECRET_KEY", default="o!ld8nrt4vc*h1zoey*wj48x*q0#ss12h=+zh)kk^6b3aygg=!")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
+
+# Production-style overrides when running on Render/Heroku-style platforms
+if os.getenv("RENDER") or os.getenv("DYNO") or os.getenv("DEPLOY_ENV") == "production":
+    try:
+        from .production_settings import *  # noqa: F401,F403
+    except Exception:
+        pass
+
+# Render-specific defaults if env vars are absent
+if os.getenv("RENDER"):
+    os.environ.setdefault("DEBUG", "False")
+    os.environ.setdefault("ALLOWED_HOSTS", "localhost,127.0.0.1")
+    os.environ.setdefault("USE_S3", "False")
 
 # change the default user models to our custom model
 AUTH_USER_MODEL = "accounts.User"
