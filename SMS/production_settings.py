@@ -22,6 +22,7 @@ from pathlib import Path
 env = environ.Env()
 
 BASE_DIR = str(Path(__file__).resolve().parent.parent)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Override DEBUG for production
 DEBUG = env.bool('DEBUG', False)
@@ -60,7 +61,8 @@ if USE_S3:
 else:
     # Local file storage
     STATIC_URL = '/static/'
-    STATIC_ROOT = 'staticfiles/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     MEDIA_URL = '/media/'
     MEDIA_ROOT = 'media/'
 
