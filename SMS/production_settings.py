@@ -21,14 +21,14 @@ from pathlib import Path
 
 env = environ.Env()
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = str(Path(__file__).resolve().parent.parent)
 
 # Override DEBUG for production
 DEBUG = env.bool('DEBUG', False)
 
 # Security settings
-SECRET_KEY = env('SECRET_KEY')
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+SECRET_KEY = env('SECRET_KEY', default='dev-secret-key')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 # Database configuration
 DATABASES = {
