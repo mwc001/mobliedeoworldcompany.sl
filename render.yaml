@@ -18,9 +18,17 @@ services:
       - key: ALLOWED_HOSTS
         value: ${{ RENDER_EXTERNAL_HOSTNAME }}
       - key: DATABASE_URL
-        fromDatabase:
-          name: lms-db
-          property: connectionString
+        value: postgresql://mydb:aBzQVIUuJyRoZNp7iDr8AzYYO1C1OHU8D@dpg-d98htqt7vvec7391ligu&-a.oregon-postgres.render.com/mydb_n2zh?sslmode=require
+      - key: DB_NAME
+        value: mydb_n2zh
+      - key: DB_USER
+        value: mydb
+      - key: DB_PASSWORD
+        value: aBzQVIUuJyRoZNp7iDr8AzYYO1C1OHU8D
+      - key: DB_HOST
+        value: dpg-d98htqt7vvec7391ligu&-a.oregon-postgres.render.com
+      - key: DB_PORT
+        value: "5432"
       - key: DJANGO_SETTINGS_MODULE
         value: SMS.settings
       - key: USE_S3
