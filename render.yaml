@@ -7,12 +7,12 @@ services:
     startCommand: bash start.sh
     healthCheckPath: /
     region: oregon
-    pythonVersion: 3.9
+    pythonVersion: 3.11
     envVars:
       - key: DEBUG
         value: "False"
       - key: PYTHON_VERSION
-        value: 3.9
+        value: 3.11
       - key: SECRET_KEY
         sync: false
       - key: ALLOWED_HOSTS
