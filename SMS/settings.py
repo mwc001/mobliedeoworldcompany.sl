@@ -34,13 +34,17 @@ render_host = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 if render_host:
     ALLOWED_HOSTS.append(render_host)
 if os.getenv("RENDER"):
-    ALLOWED_HOSTS.extend([".onrender.com", "mobliedeoworldcompany-sl.onrender.com"])
+    ALLOWED_HOSTS = ["*"]
+    if render_host:
+        ALLOWED_HOSTS.append(render_host)
 
 CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 if render_host:
     CSRF_TRUSTED_ORIGINS.append(f"https://{render_host}")
 if os.getenv("RENDER"):
     CSRF_TRUSTED_ORIGINS.append("https://mobliedeoworldcompany-sl.onrender.com")
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Production-style overrides when running on Render/Heroku-style platforms
 if os.getenv("RENDER") or os.getenv("DYNO") or os.getenv("DEPLOY_ENV") == "production":
