@@ -29,7 +29,13 @@ DEBUG = env.bool('DEBUG', False)
 
 # Security settings
 SECRET_KEY = env('SECRET_KEY', default='dev-secret-key')
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1', '.onrender.com'])
+render_host = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if render_host:
+    ALLOWED_HOSTS.append(render_host)
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
+if render_host:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{render_host}')
 
 # Database configuration
 DATABASES = {

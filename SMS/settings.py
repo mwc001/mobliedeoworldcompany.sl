@@ -30,6 +30,17 @@ SECRET_KEY = env("SECRET_KEY", default="o!ld8nrt4vc*h1zoey*wj48x*q0#ss12h=+zh)kk
 DEBUG = env.bool("DEBUG", default=True)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
+render_host = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+if render_host:
+    ALLOWED_HOSTS.append(render_host)
+if os.getenv("RENDER"):
+    ALLOWED_HOSTS.extend([".onrender.com", "mobliedeoworldcompany-sl.onrender.com"])
+
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
+if render_host:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{render_host}")
+if os.getenv("RENDER"):
+    CSRF_TRUSTED_ORIGINS.append("https://mobliedeoworldcompany-sl.onrender.com")
 
 # Production-style overrides when running on Render/Heroku-style platforms
 if os.getenv("RENDER") or os.getenv("DYNO") or os.getenv("DEPLOY_ENV") == "production":
