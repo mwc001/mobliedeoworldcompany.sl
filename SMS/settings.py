@@ -144,7 +144,12 @@ ASGI_APPLICATION = "SMS.asgi.application"
 # -----------------------------
 # NOTE: Some model fields may not work on sqlite db,
 # so consider using postgresql instead
-if os.getenv("DB_NAME"):
+DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL:
+    DATABASES = {
+        "default": env.db("DATABASE_URL")
+    }
+elif os.getenv("DB_NAME"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
