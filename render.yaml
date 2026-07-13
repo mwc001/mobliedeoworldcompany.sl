@@ -18,15 +18,15 @@ services:
       - key: ALLOWED_HOSTS
         value: ${{ RENDER_EXTERNAL_HOSTNAME }}
       - key: DATABASE_URL
-        value: postgresql://mydb:aBzQVIUuJyRoZNp7iDr8AzYYO1C1OHU8D@dpg-d98htqt7vvec7391ligu&-a.oregon-postgres.render.com/mydb_n2zh?sslmode=require
+        value: "postgresql://mydb:aBzQVUuJyRoZNp7iDr8AzYYOlCiOHU8D@dpg-d98htqt7vvec739ligu0-a.oregon-postgres.render.com/mydb_n2zh?sslmode=require"
       - key: DB_NAME
-        value: mydb_n2zh
+        value: "mydb_n2zh"
       - key: DB_USER
-        value: mydb
+        value: "mydb"
       - key: DB_PASSWORD
-        value: aBzQVIUuJyRoZNp7iDr8AzYYO1C1OHU8D
+        value: "aBzQVUuJyRoZNp7iDr8AzYYOlCiOHU8D"
       - key: DB_HOST
-        value: dpg-d98htqt7vvec7391ligu&-a.oregon-postgres.render.com
+        value: "dpg-d98htqt7vvec739ligu0-a.oregon-postgres.render.com"
       - key: DB_PORT
         value: "5432"
       - key: DJANGO_SETTINGS_MODULE
